@@ -1,0 +1,56 @@
+/* Home/index.css */
+
+.home-container {
+  padding: 16px 24px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+/* Tabs Styling */
+.tabs-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.tab-btn {
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: transparent;
+  border: none;
+  border-radius: 20px;
+  color: #555;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  background-color: #ececec;
+}
+
+.active-tab {
+  background-color: #1e90ff;
+  color: white;
+}
+
+/* Dish Cards Layout */
+.dishes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Loader Styling */
+.loader-container {
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

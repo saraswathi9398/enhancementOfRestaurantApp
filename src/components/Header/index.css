@@ -1,0 +1,43 @@
+/* Header/index.css */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background-color: white;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.app-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1e1e1e;
+}
+
+.cart-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.my-orders {
+  font-size: 18px;
+  font-weight: 500;
+  color: #1e1e1e;
+}
+
+.cart-badge {
+  background-color: red;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 20px;
+  min-width: 28px;
+  text-align: center;
+}
