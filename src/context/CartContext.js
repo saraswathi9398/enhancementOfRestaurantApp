@@ -1,30 +1,57 @@
 import {createContext, useState} from 'react'
 
-export const CartContext = createContext()
+const CartContext = createContext()
 
 export const CartProvider = ({children}) => {
-  const [cartItems, setCartItems] = useState({})
+  const [cartItems, setCartItems] = useState([])
 
-  const updateItemCount = (dishId, count) => {
+  const addCartItem = item => {
     setCartItems(prev => {
-      const newCart = {...prev}
-      if (count <= 0) {
-        delete newCart[dishId]
-      } else {
-        newCart[dishId] = count
+      const exist = prev.find(each => each.dish_id === item.dish_id)
+      if (exist) {
+        return prev.map(each =>
+          each.dish_id === item.dish_id
+            ? {...each, quantity: each.quantity + 1}
+            : each,
+        )
       }
-      return newCart
+      return [...prev, {...item, quantity: 1}]
     })
   }
 
+  const incrementCartItemQuantity = dishId => {
+    setCartItems(prev =>
+      prev.map(item =>
+        item.dish_id === dishId ? {...item, quantity: item.quantity + 1} : item,
+      ),
+    )
+  }
+
+  const decrementCartItemQuantity = dishId => {
+    setCartItems(prev =>
+      prev
+        .map(item =>
+          item.dish_id === dishId
+            ? {...item, quantity: item.quantity - 1}
+            : item,
+        )
+        .filter(item => item.quantity > 0),
+    )
+  }
+
+  const removeAllCartItems = () => setCartItems([])
+
   const getTotalItems = () =>
-    Object.values(cartItems).reduce((sum, count) => sum + count, 0)
+    cartItems.reduce((acc, item) => acc + item.quantity, 0)
 
   return (
     <CartContext.Provider
       value={{
         cartItems,
-        updateItemCount,
+        addCartItem,
+        incrementCartItemQuantity,
+        decrementCartItemQuantity,
+        removeAllCartItems,
         getTotalItems,
       }}
     >
@@ -32,3 +59,5 @@ export const CartProvider = ({children}) => {
     </CartContext.Provider>
   )
 }
+
+export default CartContext

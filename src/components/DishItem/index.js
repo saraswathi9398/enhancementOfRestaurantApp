@@ -1,53 +1,65 @@
-import {useContext} from 'react'
-import {CartContext} from '../../context/CartContext'
 import './index.css'
 
-const DishItem = ({dish}) => {
+const DishItem = ({dish, quantity, onIncrement, onDecrement}) => {
   const {
-    dish_id,
-    dish_name,
-    dish_price,
-    dish_image,
-    dish_description,
-    dish_currency,
-    dish_calories,
-    dish_Availability,
+    dishId,
+    dish_name: dishName,
+    dish_currency: dishCurrency,
+    dish_price: dishPrice,
+    dish_description: dishDescription,
+    dish_calories: dishCalories,
+    dish_image: dishImage,
+    dish_Availability: dishAvailability,
     addonCat,
   } = dish
 
-  const {cartItems, updateItemCount} = useContext(CartContext)
-  const count = cartItems[dish_id] || 0
-
-  const onIncrease = () => updateItemCount(dish_id, count + 1)
-  const onDecrease = () => updateItemCount(dish_id, count - 1)
+  const hasCustomizations = Array.isArray(addonCat) && addonCat.length > 0
 
   return (
-    <div className="dish-card">
-      <div className="dish-details">
-        <h1>{dish_name}</h1> {/* ✅ Heading for dish_name */}
-        <p>
-          {dish_currency} {dish_price}
-        </p>{' '}
-        {/* ✅ Paragraph for price */}
-        <p>{dish_description}</p> {/* ✅ Paragraph for description */}
-        <p>{dish_calories} calories</p> {/* ✅ Paragraph for calories */}
-        {!dish_Availability && (
-          <p className="not-available">Not available</p> // ✅ Paragraph for availability
+    <li className="dish-card">
+      <img src={dishImage} alt={dishName} className="dish-img" />
+
+      <div className="dish-content">
+        <h1 className="dish-name">{dishName}</h1>
+        <p className="dish-price">
+          {dishCurrency} {dishPrice}
+        </p>
+        <p className="dish-desc">{dishDescription}</p>
+        <p className="dish-cal">{dishCalories} calories</p>
+
+        {dishAvailability ? (
+          <div className="qty-controls">
+            <button
+              type="button"
+              onClick={() => onDecrement(dishId)}
+              className="qty-btn"
+            >
+              -
+            </button>
+            <p className="qty-count">{quantity}</p>
+            <button
+              type="button"
+              onClick={() => onIncrement(dishId)}
+              className="qty-btn"
+            >
+              +
+            </button>
+          </div>
+        ) : (
+          <p className="not-avail">Not available</p>
         )}
-        {addonCat.length > 0 && (
-          <p className="custom-text">Customizations available</p>
-        )}
-        <div className="counter">
-          <button onClick={onDecrease} disabled={count === 0}>
-            -
+
+        {quantity > 0 && dishAvailability && (
+          <button type="button" className="add-cart-btn">
+            ADD TO CART
           </button>
-          <p>{count}</p> {/* ✅ Paragraph for count (required) */}
-          <button onClick={onIncrease}>+</button>
-        </div>
+        )}
+
+        {hasCustomizations && (
+          <p className="custom">Customizations available</p>
+        )}
       </div>
-      <img src={dish_image} alt={dish_name} className="dish-img" />{' '}
-      {/* ✅ Image */}
-    </div>
+    </li>
   )
 }
 

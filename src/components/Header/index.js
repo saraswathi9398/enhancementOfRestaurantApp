@@ -1,17 +1,21 @@
 import {useContext} from 'react'
-import {CartContext} from '../../context/CartContext'
+import {Link} from 'react-router-dom'
+import CartContext from '../../context/CartContext'
 import './index.css'
 
 const Header = () => {
   const {getTotalItems} = useContext(CartContext)
+  const totalCount = getTotalItems()
 
   return (
-    <nav className="header">
-      <h1 className="app-title">UNI Resto Cafe</h1>
-      <div className="cart-container">
-        <p className="my-orders">My Orders</p>
-        <div className="cart-badge">{getTotalItems()}</div>
-      </div>
+    <nav className="header-container">
+      <h1 className="header-title">My Orders</h1>
+      <Link to="/cart" data-testid="cart" className="cart-link">
+        <button type="button" className="cart-icon-btn">
+          🛒
+          <span className="cart-count">{totalCount}</span>
+        </button>
+      </Link>
     </nav>
   )
 }

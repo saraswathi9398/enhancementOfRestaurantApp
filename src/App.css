@@ -1,45 +1,31 @@
 * {
   box-sizing: border-box;
 }
-
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family:
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background: #f9fafb;
+  color: #111827;
 }
 
-.app {
-  background-color: #d2d2d2;
-  height: 100vh;
-  min-width: max-content;
-  display: grid;
-  place-items: center;
-}
-.app-body {
-  display: flex;
-  height: 90vh;
-  min-width: 502px;
-  background-color: #d2d2d2;
-  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.5);
-}
-.empty-container {
-  flex: 0.65;
+.app-container {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
-.empty-container .lottle {
-  height: 300px;
-  width: 300px;
+
+.main-content {
+  flex: 1;
+  padding: 14px 16px;
 }
-.empty-container p {
-  font-family: 'Roboto';
-  font-weight: 600;
-  font-size: 25px;
-  letter-spacing: 1px;
-  color: rgb(60, 169, 60);
+
+.loading {
+  text-align: center;
+  margin-top: 40px;
 }

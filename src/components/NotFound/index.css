@@ -1,0 +1,7 @@
+.notfound {
+  display: grid;
+  place-items: center;
+  min-height: 50vh;
+  color: #374151;
+  text-align: center;
+}
